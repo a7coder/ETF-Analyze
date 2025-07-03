@@ -104,9 +104,11 @@ metric_map = {
 selected_metric_label = st.selectbox("📈 Select Performance Metric", list(metric_map.keys()), index=3)
 metric_col = metric_map[selected_metric_label]
 
+top_n = st.sidebar.slider("Top/Bottom N ETFs", 10, len(df), 50)
+
 # ----- SPLIT TOP & UNDERPERFORMERS -----
-top_df = df.sort_values(by=metric_col, ascending=False).head(50)
-under_df = df.sort_values(by=metric_col, ascending=True).head(50)
+top_df = df.sort_values(by=metric_col, ascending=False).head(top_n)
+under_df = df.sort_values(by=metric_col, ascending=True).head(top_n)
 
 # ----- TOP PERFORMERS -----
 with st.expander("🔼 Top Performer ETFs", expanded=True):

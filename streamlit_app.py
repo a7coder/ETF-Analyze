@@ -107,7 +107,7 @@ metric_col = metric_map[selected_metric_label]
 top_n = st.sidebar.slider("Top/Bottom N ETFs", 10, len(df), 50)
 
 # ----- SPLIT TOP & UNDERPERFORMERS -----
-top_df = df.sort_values(by=metric_col, ascending=False).head(top_n)
+top_df = df[df[metric_col] > 0].sort_values(by=metric_col, ascending=False).head(top_n)
 under_df = df[df[metric_col] < 0].sort_values(by=metric_col, ascending=True).head(top_n)
 
 # ----- TOP PERFORMERS -----
